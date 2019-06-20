@@ -37,10 +37,9 @@ class App extends React.Component{
     }
 
     onReDeal = () => {
-        let tempPlayer = this.state.playerWins;
-        let tempDealer = this.state.dealerWins;
+        let { playerWins, dealerWins } = this.state;
         this.setState(this.initialState);
-        this.setState({gameStarted: true, playerWins: tempPlayer, dealerWins: tempDealer}, () => this.updateDeck());
+        this.setState({gameStarted: true, playerWins: playerWins, dealerWins: dealerWins}, () => this.updateDeck());
     }
 
     updateDeck = () => {
@@ -63,9 +62,11 @@ class App extends React.Component{
     dealerLogic = () => {
         let { dealerScore } = this.state;
         console.log(dealerScore);
-        debugger;
         if(dealerScore < 17){
             this.dealerHit();
+        }
+        else {
+            this.evalScore();
         }
     }
 
@@ -220,5 +221,3 @@ class App extends React.Component{
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
-
-
