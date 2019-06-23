@@ -2,6 +2,7 @@ import React from 'react';
 import { buildDeck } from './deck.js';
 import { Hit, Stay, Start, Redeal} from './buttons.js';
 import { Score } from './score.js';
+import { Wins } from './wins.js';
 
 export class Blackjack extends React.Component{
     constructor(props){
@@ -20,11 +21,13 @@ export class Blackjack extends React.Component{
             gameOver: false,
             playerWins: 0,
             dealerWins: 0,
+            reDeal: false,
             playerStay: false,
             displayWins: false,
         };
         this.state = this.initialState;
     }
+
     onStay = () => {
         this.setState({playerStay: true}, () => this.dealerLogic());
     }
@@ -40,7 +43,7 @@ export class Blackjack extends React.Component{
         let { playerWins, dealerWins, whoWon } = this.state;
         whoWon === "player" ? playerWins++ : dealerWins++;
         this.setState(this.initialState, () => {
-            this.setState({gameStarted: true, playerWins: playerWins, dealerWins: dealerWins}, () => this.updateDeck());
+            this.setState({gameStarted: true, playerWins: playerWins, dealerWins: dealerWins, reDeal: true}, () => this.updateDeck());
         });    
     }
 
@@ -216,6 +219,10 @@ export class Blackjack extends React.Component{
         else {
             return (
                 <div className="container">
+                    { this.state.reDeal ? 
+                    <Wins playerWins={ this.state.playerWins } dealerWins={ this.state.dealerWins }/>
+                    : null
+                    }
                     <Hit click={ this.onHit }/>
                     <Stay click={ this.onStay } />
                     <Score
