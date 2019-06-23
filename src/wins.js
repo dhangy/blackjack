@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 
 export const Wins = (props) => {
-
     return (
         <Fragment>
             <p>Player Wins: { props.playerWins }</p>
