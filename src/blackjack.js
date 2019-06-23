@@ -101,7 +101,6 @@ export class Blackjack extends React.Component{
         this.setState({playerScore: playerTotal, dealerScore: dealerTotal}, () => {
             this.isGameOver();
         });
-        
     }
 
     isGameOver = () => {
@@ -128,11 +127,9 @@ export class Blackjack extends React.Component{
                 winner = "Dealer Wins!";
                 who = "dealer"
             }
-
             else {
                 winner = "Player Wins!";
-                who = "player";
-                
+                who = "player";  
             }
         }
         this.setState({winnerBanner: winner, whoWon: who});
